@@ -10,12 +10,12 @@
             <b-tbody>
               <b-tr id="date-content">
                 <b-td
-                  v-for="i in 7"
+                  v-for="i in (BOOK_DAY_FARTHEST - BOOK_DAY_NEAREST + 1)"
                   :key="i"
                   class="px-0 text-center"
-                  :class="{'td-selected': selectedDateDelta === i + 2}"
-                  @click="selectedDateDelta = i + 2"
-                >{{formatDateAhead(i + 2)}}</b-td>
+                  :class="{'td-selected': selectedDateDelta === i + BOOK_DAY_NEAREST - 1}"
+                  @click="selectedDateDelta = i + BOOK_DAY_NEAREST - 1"
+                >{{formatDateAhead(i + BOOK_DAY_NEAREST - 1)}}</b-td>
               </b-tr>
             </b-tbody>
           </b-table-simple>
@@ -36,9 +36,9 @@
               </b-tr>
             </b-thead>
             <b-tbody>
-              <b-tr v-for="j in 22-8" :key="j">
-                <b-td v-for="room_ in B116ROOMS" :key="room_" class="py-1">
-                  <span>{{ j+7 }}:00</span>
+              <b-tr v-for="j in BOOK_HOUR_END - BOOK_HOUR_START + 1" :key="j">
+                <b-td v-for="room in B116ROOMS" :key="room" class="py-1">
+                  <span>{{ j + BOOK_HOUR_START - 1 }}:00</span>
                 </b-td>
               </b-tr>
             </b-tbody>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { B116ROOMS } from '@/consts'
+import CONSTS from '@/consts'
 
 const today = new Date().setHours(0, 0, 0, 0)
 
@@ -71,7 +71,7 @@ export default {
     return {
       text: 'llal',
       selectedDateDelta: 3,
-      B116ROOMS
+      ...CONSTS
     }
   },
   methods: {
@@ -91,5 +91,6 @@ export default {
 .room {
   border-collapse: separate;
   border-spacing: 6px 4px;
+  border: 0px;
 }
 </style>
