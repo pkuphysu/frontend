@@ -10,7 +10,7 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item href="/BookB116">主页</b-nav-item>
+            <b-nav-item to="/bookB116">主页</b-nav-item>
             <b-nav-item href="#">注销</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
@@ -20,7 +20,7 @@
     <DisAlert v-for="message in messages" :key="message" :message="message" />
     <div class="text-center">
       &copy; 2019 北大物理. &nbsp;
-      <a href="#">问题反馈</a>
+      <a href="/html/feedback">问题反馈</a>
     </div>
   </div>
 </template>

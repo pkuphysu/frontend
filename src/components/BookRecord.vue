@@ -1,7 +1,7 @@
 <template>
   <b-list-group>
     <b-list-group-item>
-      <b-badge pill :variant="badge.variant" class="float-left">{{badge.text}}</b-badge>
+      <b-badge pill :variant="badge.variant" class="float-left" style="font-size: 0.9em">{{badge.text}}</b-badge>
       <h4 class="d-inline-block ml-1 mb-0">Hello</h4>
       <b-button
         v-if="userId == sponsorId && !record.canceled"
@@ -20,7 +20,7 @@
     </b-collapse>
     <b-list-group-item class="booking-detail">
       <p>预约时间：{{formatTimeRange(record.startTime, record.endTime)}}</p>
-      <p>发起人：{{record.sponsor}} ({{sponsorId}})</p>
+      <p>发起人：{{record.sponsor}} ({{record.confirmStatus[0].rawStudentId}})</p>
       <p>发起时间：{{formatTime(record.bookTime)}}</p>
       <p>参与人数：{{record.studentNumber}}</p>
       <p>用途：{{record.description}}</p>

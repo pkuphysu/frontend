@@ -14,9 +14,20 @@ const routes = [
     }
   },
   {
-    path: '/BookB116',
+    path: '/bookB116',
     name: 'bookingIndex',
-    component: () => import('@/views/BookingIndex'),
+    component: () => import('@/views/BookingIndex')
+  },
+  {
+    path: '/bookB116/book',
+    name: 'bookingMain',
+    component: () => import('@/views/BookingMain')
+  },
+  {
+    path: '/html/:src',
+    name: 'markdownView',
+    props: true,
+    component: () => import('@/views/MarkdownView')
   },
   {
     path: '/about',

@@ -12,7 +12,7 @@
         </ol>
       </b-col>
       <b-col cols="12">
-        <b-button v-if="user.bookCount < 2" href="#" variant="primary" block>新建预约</b-button>
+        <b-button v-if="user.bookCount < 2" to="/bookB116/book" variant="primary" block>新建预约</b-button>
         <b-button v-else variant="primary" block disabled>预约已达上限</b-button>
       </b-col>
     </b-row>
