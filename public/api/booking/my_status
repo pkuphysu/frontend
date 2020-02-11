@@ -1,0 +1,32 @@
+{
+    "bookRecords": [
+        {
+            "id": 0,
+            "canceled": false,
+            "confirmed": false,
+            "bookTime": 1581405074480,
+            "startTime": 1581406074480,
+            "endTime": 1581407074480,
+            "description": "撸猫",
+            "studentNumber": 3,
+            "sponsor": "TTH",
+            "confirmStatus": [
+                {
+                    "studentId": "GHJFbjkbhGHS#$687g",
+                    "rawStudentId": "1800033032",
+                    "confirmed": true
+                },
+                {
+                    "studentId": "asjgyu&*^(HS#$687g",
+                    "rawStudentId": "1800033453",
+                    "confirmed": true
+                },
+                {
+                    "studentId": "asjgyu&*^(HS#$687g",
+                    "rawStudentId": "1800033453",
+                    "confirmed": false
+                }
+            ]
+        }
+    ]
+}
