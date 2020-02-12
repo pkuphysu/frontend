@@ -62,7 +62,8 @@ export default {
   },
   watch: {
     selectedDayIndex() {
-      console.log('asdf')
+      this.$alertMessages.push('ajkdhf')
+      console.log(this.$alertMessages)
       this.selectingRoom = this.selectStart = this.selectEnd = null
     }
   },

@@ -55,7 +55,7 @@
       </b-card-header>
       <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
         <b-card-body>
-          <b-form @submit.stop.prevent>
+          <b-form>
             <b-row
               v-for="field in formFields"
               :key="field.id"
@@ -76,14 +76,6 @@
                   :placeholder="field.placeholder"
                   required
                 />
-                <!-- <b-form-input
-                  v-else-if="field.type == 'number'"
-                  :id="field.id"
-                  v-model.number="formAnswers[field.id]"
-                  type="number"
-                  :placeholder="field.placeholder"
-                  required
-                />-->
                 <b-form-input
                   v-else
                   :id="field.id"

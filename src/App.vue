@@ -17,7 +17,9 @@
       </b-navbar>
     </div>
     <router-view />
-    <DisAlert v-for="message in messages" :key="message" :message="message" />
+    <div class="alert-msg px-3">
+      <DisAlert v-for="message in $alertMessages" :key="message" :message="message" />
+    </div>
     <div class="text-center">
       &copy; 2019 北大物理. &nbsp;
       <a href="/html/feedback">问题反馈</a>
@@ -33,12 +35,16 @@ export default {
   components: {
     DisAlert
   },
-  data() {
-    return {
-      messages: ['Ha!', 'You win!', 'Damn!']
-    }
+  created() {
+    this.$alertMessages.push('Hello!')
   }
 }
 </script>
 
-<style></style>
+<style>
+.alert-msg {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+</style>
