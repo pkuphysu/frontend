@@ -18,7 +18,7 @@
     </div>
     <router-view />
     <div class="alert-msg px-3">
-      <DisAlert v-for="message in $alertMessages" :key="message" :message="message" />
+      <DisAlert v-for="message in $store.state.alertMessages" :key="message" :message="message" />
     </div>
     <div class="text-center">
       &copy; 2019 北大物理. &nbsp;
@@ -36,7 +36,7 @@ export default {
     DisAlert
   },
   created() {
-    this.$alertMessages.push('Hello!')
+    this.$store.commit('alert', 'Hello!')
   }
 }
 </script>

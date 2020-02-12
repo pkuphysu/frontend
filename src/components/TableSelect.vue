@@ -62,8 +62,7 @@ export default {
   },
   watch: {
     selectedDayIndex() {
-      this.$alertMessages.push('ajkdhf')
-      console.log(this.$alertMessages)
+      this.$store.commit('alert', 'ajkdhf')
       this.selectingRoom = this.selectStart = this.selectEnd = null
     }
   },
