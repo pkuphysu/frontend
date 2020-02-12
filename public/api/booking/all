@@ -1,29 +1,26 @@
 [
-    [
-        {
-            "room_id": 0,
-            "start": 9,
-            "end": 9
-        }
-    ],
-    [
-        {
-            "room_id": 0,
-            "start": 19,
-            "end": 20
-        },
-        {
-            "room_id": 0,
-            "start": 11,
-            "end": 12
-        }
-    ],
-    [],
-    [
-        {
-            "room_id": 0,
-            "start": 9,
-            "end": 9
-        }
-    ]
+  {
+    "day": 3,
+    "roomId": 0,
+    "start": 9,
+    "end": 9
+  },
+  {
+    "day": 4,
+    "roomId": 0,
+    "start": 19,
+    "end": 20
+  },
+  {
+    "day": 4,
+    "roomId": 0,
+    "start": 11,
+    "end": 12
+  },
+  {
+    "day": 6,
+    "roomId": 0,
+    "start": 9,
+    "end": 9
+  }
 ]
