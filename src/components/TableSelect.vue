@@ -62,7 +62,11 @@ export default {
   },
   watch: {
     selectedDayIndex() {
-      this.$store.commit('alert', 'ajkdhf')
+      this.$store.commit({
+        type: 'alert',
+        text: 'ajkdhf',
+        variant: 'info'
+      })
       this.selectingRoom = this.selectStart = this.selectEnd = null
     }
   },
@@ -106,13 +110,13 @@ export default {
     touchend() {
       if (this.selecting) {
         this.selecting = false
-        this.$emit(
-          'selected',
-          [
+        this.$emit('selected', {
+          room: this.selectingRoom,
+          time: [
             this.selectStart + this.BOOK_HOUR_START,
             this.selectEnd + this.BOOK_HOUR_START
           ].sort((a, b) => a - b)
-        )
+        })
       }
     }
   }
@@ -133,7 +137,7 @@ export default {
 }
 .room {
   border-collapse: separate;
-  border-spacing: 6px 4px;
+  /* border-spacing: 6px 4px; */
   border: 0px;
 }
 .room {

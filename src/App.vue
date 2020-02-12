@@ -18,7 +18,11 @@
     </div>
     <router-view />
     <div class="alert-msg px-3">
-      <DisAlert v-for="message in $store.state.alertMessages" :key="message" :message="message" />
+      <DisAlert
+        v-for="(message, i) in $store.state.alertMessages"
+        :key="message.text + i"
+        :message="message"
+      />
     </div>
     <div class="text-center">
       &copy; 2019 北大物理. &nbsp;
@@ -32,11 +36,15 @@
 import DisAlert from '@/components/DisAlert'
 
 export default {
+  name: 'App',
   components: {
     DisAlert
   },
   created() {
-    this.$store.commit('alert', 'Hello!')
+    this.$store.commit({
+      type: 'alert',
+      text: 'Hello!'
+    })
   }
 }
 </script>
@@ -44,7 +52,7 @@ export default {
 <style>
 .alert-msg {
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 </style>

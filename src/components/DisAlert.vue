@@ -1,12 +1,11 @@
 <template>
   <b-alert
     :show="countDown"
-    variant="warning"
+    :variant="message.variant || 'warning'"
     dismissible
     @dismissed="countDown = 0"
     @dismiss-count-down="countDownChanged"
-    >{{ message }}</b-alert
-  >
+  >{{ message.text }}</b-alert>
 </template>
 
 <script>
@@ -14,7 +13,7 @@ export default {
   name: 'DisAlert',
   props: {
     message: {
-      type: String,
+      type: Object,
       required: true
     }
   },
