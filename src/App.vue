@@ -17,7 +17,7 @@
       </b-navbar>
     </div>
     <router-view />
-    <div class="alert-msg px-3">
+    <div class="px-3 position-fixed fixed-bottom m-0">
       <DisAlert
         v-for="(message, i) in $store.state.alertMessages"
         :key="message.text + i"
@@ -50,9 +50,4 @@ export default {
 </script>
 
 <style>
-.alert-msg {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-}
 </style>

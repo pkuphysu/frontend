@@ -13,6 +13,7 @@
         v-b-toggle="countDown === null ? `collapse-${record.id}` : undefined"
         variant="outline-primary"
         class="float-right p-0"
+        :disabled="!!countDown"
         @click="cancel"
       >
         {{
@@ -96,16 +97,11 @@ export default {
     this.badge = this.parseBadge(this.record)
   },
   methods: {
-    async cancel(e) {
+    async cancel() {
       await sleep(100)
       if (this.countDown) return
-      this.countDown = 1
-      e.target.disabled = true
-      while (this.countDown > 0) {
-        await sleep(1000)
-        this.countDown -= 1
-      }
-      e.target.disabled = false
+      this.countDown = 3
+      while ((this.countDown -= 1)) await sleep(1000)
     },
     formatTime(time) {
       let t = new Date(time)
