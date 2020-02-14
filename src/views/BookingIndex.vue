@@ -40,6 +40,7 @@ export default {
     }
   },
   async created() {
+    this.$root.loginRequired()
     let response = await fetch('/api/booking/my_status')
     response = await response.json()
     this.bookRecords = response.bookRecords

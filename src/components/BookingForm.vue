@@ -98,25 +98,23 @@ export default {
       for (let input of this.$refs.form.elements) {
         if (input.tagName === 'BUTTON') continue
         if (!input.value) {
-          this.$store.commit({
-            type: 'alert',
-            text: '请填写 ' + input.labels[0].innerText,
-            variant: 'danger'
-          })
+          this.alert('请填写 ' + input.labels[0].innerText)
           this.$refs.submit.click()
           return false
         }
         if (input.className.includes('invalid')) {
-          this.$store.commit({
-            type: 'alert',
-            text: '请正确填写 ' + input.labels[0].innerText,
-            variant: 'danger'
-          })
+          this.alert('请正确填写 ' + input.labels[0].innerText)
           return false
         }
       }
-      // this.$emit('submit')
       return true
+    },
+    alert(text) {
+     this.$store.commit({
+            type: 'alert',
+            text: text,
+            variant: 'danger'
+          }) 
     }
   }
 }

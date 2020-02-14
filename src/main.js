@@ -11,5 +11,17 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(App)
+  methods: {
+    loginRequired() {
+      if (!store.state.user) {
+        store.commit({
+          type: 'alert',
+          text: '请先登录',
+          varaint: 'info'
+        })
+        router.push('login')
+      }
+    }
+  },
+  render: h => h(App),
 }).$mount('#app')

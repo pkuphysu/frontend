@@ -41,10 +41,6 @@ export default {
     DisAlert
   },
   created() {
-    this.$store.commit({
-      type: 'alert',
-      text: 'Hello!'
-    })
   }
 }
 </script>
