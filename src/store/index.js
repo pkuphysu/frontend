@@ -12,17 +12,16 @@ export default new Vuex.Store({
     alert(state, msg) {
       state.alertMessages.push(msg)
     },
-    login(state, user) {
-      state.user = user
-      localStorage.setItem('user', JSON.stringify(user))
+    login(state, payload) {
+      state.user = payload.user
+      if (payload.remember)
+        localStorage.setItem('user', JSON.stringify(payload.user))
     },
     logout(state) {
       state.user = null
       localStorage.removeItem('user')
     }
   },
-  actions: {
-  },
-  modules: {
-  }
+  actions: {},
+  modules: {}
 })

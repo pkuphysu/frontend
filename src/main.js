@@ -19,7 +19,7 @@ new Vue({
           text: '请先登录',
           varaint: 'info'
         })
-        router.push('login')
+        router.push('/login')
       }
     }
   },

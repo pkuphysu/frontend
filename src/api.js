@@ -65,8 +65,8 @@ export default {
     let rawId = store.state.user.rawId
     return await requestApi('post', '/api/twice_vercode?rawId=' + rawId, true)
   },
-  login: async (vercode, remember) =>
-    await requestApi('post', '/login', false, { vercode, remember }),
+  login: async vercode =>
+    await requestApi('post', '/login', false, { vercode }),
   bookingStatus: async () => {
     let resp = await requestApi('get', '/api/booking/my', true)
     if (!resp) return false
