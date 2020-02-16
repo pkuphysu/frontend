@@ -63,7 +63,7 @@ export default {
     await requestApi('post', '/api/vercode', false, { stu_id }),
   twiceVercode: async () => {
     let rawId = store.state.user.rawId
-    return await requestApi('post', '/api/twice_vercode?rawId=' + rawId, true)
+    return await requestApi('get', '/api/twice_vercode?rawId=' + rawId, true)
   },
   login: async vercode =>
     await requestApi('post', '/login', false, { vercode }),
@@ -80,7 +80,7 @@ export default {
   bookingAll: async () => await requestApi('get', '/api/booking/all', true),
   book: async data => {
     let rawId = store.state.user.rawId
-    return await requestApi('post', '/api/book?rawId=' + rawId, true, data)
+    return await requestApi('post', '/api/booking/book?rawId=' + rawId, true, data)
   },
   cancel: async (book_id, vercode) =>
     await requestApi('post', '/api/booking/cancel', true, { book_id, vercode }),
