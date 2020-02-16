@@ -2,7 +2,7 @@
   <b-container>
     <h2>请登录</h2>
     <b-input-group>
-      <b-form-input id="stu_id" type="number" placeholder="学号" autofocus />
+      <b-form-input v-model="stuId" type="number" placeholder="学号" autofocus />
       <b-input-group-append>
         <b-button variant="primary" :disabled="!!countDown" @click="getCode">
           {{
@@ -15,29 +15,42 @@
         </b-button>
       </b-input-group-append>
     </b-input-group>
-    <b-form class="pt-3" @submit.prevent.stop>
-      <b-form-input id="vercode" type="number" placeholder="验证码" required />
-      <b-checkbox id="checkbox" name="remember">记住账号</b-checkbox>
+    <b-form class="pt-3" @submit.prevent="login">
+      <b-form-input id="vercode" v-model="vercode" type="number" placeholder="验证码" required />
+      <b-checkbox id="checkbox" v-model="remember" name="remember">记住账号</b-checkbox>
       <b-button lg variant="primary" block type="submit">登录</b-button>
     </b-form>
   </b-container>
 </template>
 
 <script>
-import {sleep} from '@/utils'
+import { sleep } from '@/utils'
+import api from '@/api'
 
 export default {
   name: 'Login',
   data() {
     return {
-      countDown: null
+      stuId: '',
+      countDown: null,
+      vercode: '',
+      remember: false
     }
   },
   methods: {
     async getCode() {
-      await sleep(100)
+      // Cool down even if fail
+      // disable it first, or ueser will click twice
       this.countDown = 5
-      while((--this.countDown)) await sleep(1000)
+      await api.loginVercode(this.stuId)
+      while (--this.countDown) await sleep(1000)
+    },
+    async login() {
+      let resp = await api.login(this.vercode, this.remember)
+      if (resp) {
+        this.$store.commit('login', resp.data.user)
+        this.$router.go(-1)
+      }
     }
   }
 }

@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     alertMessages: [],
-    user: localStorage.getItem('user')
+    user: JSON.parse(localStorage.getItem('user'))
   },
   mutations: {
     alert(state, msg) {
@@ -14,6 +14,11 @@ export default new Vuex.Store({
     },
     login(state, user) {
       state.user = user
+      localStorage.setItem('user', JSON.stringify(user))
+    },
+    logout(state) {
+      state.user = null
+      localStorage.removeItem('user')
     }
   },
   actions: {

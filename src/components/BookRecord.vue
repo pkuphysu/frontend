@@ -10,7 +10,6 @@
       <h5 class="d-inline-block ml-1 mb-0">{{B116ROOMS[record.roomId]}}</h5>
       <b-button
         v-if="userId == sponsorId && !record.canceled"
-        v-b-toggle="countDown === null ? `collapse-${record.id}` : undefined"
         variant="outline-primary"
         class="float-right p-0"
         :disabled="!!countDown"
@@ -25,11 +24,11 @@
         }}
       </b-button>
     </b-list-group-item>
-    <b-collapse :id="`collapse-${record.id}`">
+    <b-collapse :visible="countDown !== null">
       <b-input-group>
-        <b-form-input type="number" placeholder="验证码将发至您的北大邮箱" />
+        <b-form-input v-model="vercode" type="number" placeholder="验证码将发至您的北大邮箱" />
         <b-input-group-append>
-          <b-button variant="outline-dark">提交</b-button>
+          <b-button variant="outline-dark" @click="submit">提交</b-button>
         </b-input-group-append>
       </b-input-group>
     </b-collapse>
@@ -57,6 +56,7 @@
           v-if="student.studentId == userId"
           variant="outlined-primary"
           class="float-right p-0"
+          @click="confirm"
         >确认</b-button>
         <b-button v-else variant="outline-warning" class="float-right p-0" disabled>等待确认</b-button>
       </span>
@@ -68,6 +68,7 @@
 <script>
 import { BOOK_DAY_NEAREST, B116ROOMS } from '@/consts'
 import { sleep } from '@/utils'
+import api from '@/api'
 
 const now = new Date().getTime()
 const today = new Date().setHours(0, 0, 0, 0)
@@ -78,53 +79,35 @@ export default {
     record: {
       type: Object,
       required: true
-    },
-    userId: {
-      type: String,
-      required: true
     }
   },
   data() {
     return {
+      vercode: '',
       countDown: null,
-      sponsorId: this.record.confirmStatus[0].studentId,
-      dead: this.record.startTime < cancelDDL,
       B116ROOMS
     }
   },
-  created() {
-    // Need this.dead, can not put in data()
-    this.badge = this.parseBadge(this.record)
-  },
-  methods: {
-    async cancel() {
-      await sleep(100)
-      if (this.countDown) return
-      this.countDown = 3
-      while ((this.countDown -= 1)) await sleep(1000)
+  computed: {
+    userId() {
+      return this.$store.state.user.id
     },
-    formatTime(time) {
-      let t = new Date(time)
-      return (
-        `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ` +
-        `${t.getHours()}:${t.getMinutes()}`
-      )
+    sponsorId() {
+      return this.record.confirmStatus[0].studentId
     },
-    formatTimeRange(startTime, endTime) {
-      let s = this.formatTime(startTime)
-      let e = new Date(endTime)
-      return `${s} 至 ${e.getHours()}:${e.getMinutes()}`
+    dead() {
+      return this.record.startTime < cancelDDL
     },
-    parseBadge(record) {
-      if (record.canceled)
+    badge() {
+      if (this.record.canceled)
         return {
           variant: 'danger',
           text: '已取消'
         }
-      else if (record.confirmed) {
+      else if (this.record.confirmed) {
         let text
-        if (now > record.endTime) text = '已完成'
-        else if (now < record.startTime) text = '成功预约'
+        if (now > this.record.endTime) text = '已完成'
+        else if (now < this.record.startTime) text = '成功预约'
         else text = '正在进行'
         return {
           variant: 'success',
@@ -140,6 +123,39 @@ export default {
           variant: 'info',
           text: '等待确认'
         }
+    }
+  },
+  watch: {
+    'record.canceled'() {
+      this.countDown = null
+    }
+  },
+  methods: {
+    async cancel() {
+      this.countDown = 3
+      await api.twiceVercode()
+      while (--this.countDown) await sleep(1000)
+    },
+    async submit() {
+      let resp = await api.cancel(this.record.id, this.vercode)
+      this.vercode = ''
+      console.log(resp)
+      if (resp) this.$emit('change')
+    },
+    async confirm() {
+      if (await api.confirm(this.record.id)) this.$emit('change')
+    },
+    formatTime(time) {
+      let t = new Date(time)
+      return (
+        `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ` +
+        `${t.getHours()}:${t.getMinutes()}`
+      )
+    },
+    formatTimeRange(startTime, endTime) {
+      let s = this.formatTime(startTime)
+      let e = new Date(endTime)
+      return `${s} 至 ${e.getHours()}:${e.getMinutes()}`
     }
   }
 }

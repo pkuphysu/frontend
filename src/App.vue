@@ -11,7 +11,7 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item to="/bookB116">主页</b-nav-item>
-            <b-nav-item href="#">注销</b-nav-item>
+            <b-nav-item @click="logout">注销</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -40,7 +40,11 @@ export default {
   components: {
     DisAlert
   },
-  created() {
+  methods: {
+    logout() {
+      this.$router.push('/login')
+      this.$store.commit('logout')
+    }
   }
 }
 </script>

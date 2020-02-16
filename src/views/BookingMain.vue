@@ -75,6 +75,7 @@ import CONSTS from '@/consts'
 import { sleep } from '@/utils'
 import TableSelect from '@/components/TableSelect'
 import BookingForm from '@/components/BookingForm'
+import api from '@/api'
 
 const today = new Date().setHours(0, 0, 0, 0)
 
@@ -95,6 +96,9 @@ export default {
       ...CONSTS
     }
   },
+  created() {
+    this.$root.loginRequired()
+  },
   methods: {
     formatDateAhead(delta) {
       let d = new Date(today + delta * 86400000)
@@ -114,7 +118,7 @@ export default {
       // if I selected the same date
       this.$forceUpdate()
     },
-    submit() {
+    async submit() {
       if (this.vercodeVisible === false) {
         if (this.$refs.form.submit()) {
           if (this.selectedRoomTime == null) {
@@ -123,9 +127,11 @@ export default {
               text: '请选择好房间和时间后提交'
             })
           } else {
-            this.requestBook(true)
-            this.sendVercode()
-            this.vercodeVisible = true
+            let resp = await this.requestBook(true)
+            if (resp.status == 200) {
+              this.sendVercode()
+              this.vercodeVisible = true
+            }
           }
         }
       } else {
@@ -135,17 +141,18 @@ export default {
             text: '请正确填写验证码',
             variant: 'danger'
           })
+          return
         }
-        this.requestBook()
+        let resp = await this.requestBook()
+        if (resp.status == 200) this.$router.push('/bookB116')
       }
     },
     async sendVercode() {
-      // await api here
-      await sleep(100)
       this.countDown = 5
+      await api.twiceVercode()
       while (--this.countDown) await sleep(1000)
     },
-    requestBook(test) {
+    async requestBook(test) {
       const now = new Date()
       const bookingDay = new Date(
         +now + (this.selectedDayIndex + this.BOOK_DAY_NEAREST) * 86400000
@@ -157,11 +164,12 @@ export default {
         room_id: this.selectedRoomTime.room,
         start,
         end,
-        ...this.formAnswers,
+        ...this.$refs.form.formAnswers,
         test,
         vercode: this.vercode
       }
       console.log(data)
+      return await api.book(data)
     }
   }
 }

@@ -41,6 +41,7 @@
 
 <script>
 import CONSTS from '@/consts'
+import api from '@/api'
 
 export default {
   name: 'TableSelect',
@@ -71,8 +72,7 @@ export default {
     }
   },
   async created() {
-    let response = await fetch('/api/booking/all')
-    response = await response.json()
+    let response = (await api.bookingAll()).data
     const dayCount = this.BOOK_DAY_FARTHEST - this.BOOK_DAY_NEAREST + 1
     const hourCount = this.BOOK_HOUR_END - this.BOOK_HOUR_START + 1
     let bookingInfo = new Array(dayCount)

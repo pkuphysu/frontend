@@ -12,18 +12,19 @@
         </ol>
       </b-col>
       <b-col cols="12">
-        <b-button v-if="user.bookCount < 2" to="/bookB116/book" variant="primary" block>新建预约</b-button>
+        <b-button v-if="bookCount < 2" to="/bookB116/book" variant="primary" block>新建预约</b-button>
         <b-button v-else variant="primary" block disabled>预约已达上限</b-button>
       </b-col>
     </b-row>
     <b-col v-for="bookRecord in bookRecords" :key="bookRecord.id" cols="12" class="py-2">
-      <BookRecord :record="bookRecord" :user-id="user.id" />
+      <BookRecord :record="bookRecord" @change="refresh" />
     </b-col>
   </b-container>
 </template>
 
 <script>
 import BookRecord from '@/components/BookRecord'
+import api from '@/api'
 
 export default {
   name: 'BookingIndex',
@@ -32,18 +33,25 @@ export default {
   },
   data() {
     return {
-      user: {
-        id: 'GHJFbjkbhGHS#$687g',
-        bookCount: 1
-      },
+      bookCount: 0,
       bookRecords: []
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
     }
   },
   async created() {
     this.$root.loginRequired()
-    let response = await fetch('/api/booking/my_status')
-    response = await response.json()
-    this.bookRecords = response.bookRecords
+    this.refresh()
+  },
+  methods: {
+    async refresh() {
+      let response = await api.bookingStatus()
+      this.bookCount = response.data.bookCount
+      this.bookRecords = response.data.bookRecords
+    }
   }
 }
 </script>
