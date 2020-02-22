@@ -139,7 +139,6 @@ export default {
     async submit() {
       let resp = await api.cancel(this.record.id, this.vercode)
       this.vercode = ''
-      console.log(resp)
       if (resp) this.$emit('change')
     },
     async confirm() {

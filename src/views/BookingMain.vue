@@ -168,7 +168,6 @@ export default {
         test,
         vercode: this.vercode
       }
-      console.log(data)
       return await api.book(data)
     }
   }

@@ -48,9 +48,7 @@ const requestApi = async (method, url, login, data) => {
   let resp
   try {
     resp = await axios({ method, url, data, withCredentials: true })
-    console.log(resp)
   } catch (err) {
-    console.log(err.response)
     flashMsgs(err.response)
     return false
   }
