@@ -46,9 +46,13 @@ export default {
       while (--this.countDown) await sleep(1000)
     },
     async login() {
-      let resp = await api.login(this.vercode, this.remember)
+      let resp = await api.login(this.vercode)
       if (resp) {
-        this.$store.commit('login', resp.data.user)
+        this.$store.commit({
+          type: 'login', 
+          user: resp.data.user,
+          remember: this.remember
+        })
         this.$router.go(-1)
       }
     }
