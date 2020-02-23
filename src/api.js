@@ -64,7 +64,7 @@ export default {
     return await requestApi('post', '/api/twice_vercode?rawId=' + rawId, true)
   },
   login: async (vercode, remember) =>
-    await requestApi('post', '/login', false, { vercode, remember }),
+    await requestApi('post', '/api/login', false, { vercode, remember }),
   bookingStatus: async () => {
     let resp = await requestApi('get', '/api/booking/my', true)
     if (!resp) return false
