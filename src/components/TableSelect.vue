@@ -63,11 +63,6 @@ export default {
   },
   watch: {
     selectedDayIndex() {
-      this.$store.commit({
-        type: 'alert',
-        text: 'ajkdhf',
-        variant: 'info'
-      })
       this.selectingRoom = this.selectStart = this.selectEnd = null
     }
   },
