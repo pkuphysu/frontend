@@ -10,7 +10,7 @@ module.exports = {
   devServer: {
     setup(app) {
       app.get(/api\/.*/, (req, res, next) => {
-        req.url += '.json'
+        req.url = req.path + '.json'
         next()
       })
       app.use('/api', express.static('api'))
@@ -18,6 +18,17 @@ module.exports = {
         let reqJ = JSON.parse(req.body)
         res.json({
           vercode: reqJ.vercode
+        })
+      })
+      app.post('/api/login', (req, res) => {
+        res.json({
+          message: 'Logged In',
+          user: {
+            token: '1234567890',
+            timestamp: '1234567890',
+            rawId: '1234567890',
+            id: '1234567890'
+          }
         })
       })
     }
