@@ -38,17 +38,20 @@
 export default {
   name: 'BookingForm',
   data() {
+    // To enable multi people booking, remove pre-filled rawId,
+    // and uncomment students field
+    let rawId = this.$store.state.user.rawId
     return {
       countDown: null,
       allFormReady: false,
       formValid: false,
       formAnswers: {
-        sponsor: 'qwe',
-        contact: '12345678909',
-        stu_num: '3',
-        stu1: '1900011338',
-        stu2: '1900011338',
-        description: '1'
+        sponsor: '',
+        contact: '',
+        stu_num: '',
+        stu1: rawId,
+        stu2: rawId,
+        description: ''
       },
       formFields: [
         {
@@ -70,20 +73,20 @@ export default {
           type: 'number',
           id: 'stu_num'
         },
-        {
-          label: '参与学生1',
-          placeholder: '学号',
-          type: 'number',
-          id: 'stu1',
-          length: 10
-        },
-        {
-          label: '参与学生2',
-          placeholder: '学号',
-          type: 'number',
-          id: 'stu2',
-          length: 10
-        },
+        // {
+        //   label: '参与学生1',
+        //   placeholder: '学号',
+        //   type: 'number',
+        //   id: 'stu1',
+        //   length: 10
+        // },
+        // {
+        //   label: '参与学生2',
+        //   placeholder: '学号',
+        //   type: 'number',
+        //   id: 'stu2',
+        //   length: 10
+        // },
         {
           label: '预约用途',
           placeholder: '用途',
