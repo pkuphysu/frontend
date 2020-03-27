@@ -24,12 +24,15 @@
                 selectingRoom === roomIndex &&
                 (selectStart - j + 1) * (selectEnd - j + 1) <= 0
             }"
+            @touchstart.capture="pointerStart"
+            @touchmove.capture="pointerMove"
+            @touchend.capture="pointerEnd"
+            @mousedown.capture="pointerStart"
+            @mousemove.capture="pointerMove"
+            @mouseup.capture="pointerEnd"
           >
-            <span
-              @touchstart="touchstart"
-              @touchmove="touchmove"
-              @touchend="touchend"
-            >{{ j + BOOK_HOUR_START - 1 }}点段</span>
+            <!-- Use capture to include event in span -->
+            <span>{{ j + BOOK_HOUR_START - 1 }}点段</span>
           </b-td>
         </b-tr>
       </b-tbody>
@@ -80,27 +83,52 @@ export default {
     this.bookingInfo = bookingInfo
   },
   methods: {
-    touchstart(e) {
+    targetTD(e) {
+      if (e.target.tagName === 'SPAN') return e.target.parentElement
+      if (e.target.tagName === 'TD') return e.target
+    },
+    pointerStart(e) {
       if (this.selecting) return
       this.selecting = true
-      let td = e.target.parentElement
+      let td = this.targetTD(e)
       this.selectingRoom = td.cellIndex
       this.selectStart = this.selectEnd = td.parentElement.rowIndex
     },
-    touchmove(e) {
+    /**
+     * The logic needs to be improved.
+     * Currently, the handler evaluates BOOK_MAX_SELECT and booked whenever
+     * the pointer moves onto SPAN or TD. But if user drag too fast...
+     * @param {MouseEvent|TouchEvent} e - The event
+     * @returns {}
+     */
+    pointerMove(e) {
       if (!this.selecting) return
-      let point = e.touches[0]
-      let span = document.elementFromPoint(point.clientX, point.clientY)
-      if (span.tagName === 'TD' && span.className.includes('td-booked'))
+      let point = e.touches ? e.touches[0] : e
+      let tds = document
+        .elementsFromPoint(point.clientX, point.clientY)
+        .filter(ele => ele.tagName === 'TD')
+      // Maybe out side the table
+      if (!tds) {
         this.selecting = false
+        return
+      }
+      let td = tds[0]
       if (
-        span.tagName === 'SPAN' &&
-        span.parentElement.cellIndex === this.selectingRoom &&
-        Math.abs(this.selectStart - this.selectEnd) < this.BOOK_MAX_SELECT - 1
+        td.className.includes('td-booked') ||
+        // Not seleting on the same day
+        td.cellIndex !== this.selectingRoom
+      ) {
+        this.selecting = false
+        return
+      }
+      // Not exceeding the limit
+      if (
+        Math.abs(this.selectStart - this.selectEnd) <
+        this.BOOK_MAX_SELECT - 1
       )
-        this.selectEnd = span.parentElement.parentElement.rowIndex
+        this.selectEnd = td.parentElement.rowIndex
     },
-    touchend() {
+    pointerEnd() {
       if (this.selecting) {
         this.selecting = false
         this.$emit('selected', {
@@ -130,6 +158,10 @@ export default {
 }
 .room {
   border-collapse: separate;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   /* border-spacing: 6px 4px; */
   border: 0px;
 }

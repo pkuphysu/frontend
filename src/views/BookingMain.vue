@@ -165,7 +165,7 @@ export default {
     /**
      * Core method in this view.
      * Take current status and send a request of booking to te server
-     * @param {boolean} test - Testing request or real request
+     * @param {boolean} [test=false] - Testing request or real request
      * @returns {boolean} If server thinks the request is valid
      */
     async requestBook(test) {
