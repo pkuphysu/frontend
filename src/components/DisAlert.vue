@@ -5,7 +5,9 @@
     dismissible
     @dismissed="countDown = 0"
     @dismiss-count-down="countDownChanged"
-  >{{ message.text }}</b-alert>
+  >
+    {{ message.text }}
+  </b-alert>
 </template>
 
 <script>

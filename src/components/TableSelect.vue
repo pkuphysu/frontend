@@ -4,9 +4,7 @@
       <b-thead>
         <b-tr>
           <b-th v-for="room in B116ROOMS" :key="room" class="px-0">
-            {{
-            room
-            }}
+            {{ room }}
           </b-th>
         </b-tr>
       </b-thead>

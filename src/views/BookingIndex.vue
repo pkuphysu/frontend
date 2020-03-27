@@ -12,11 +12,25 @@
         </ol>
       </b-col>
       <b-col cols="12">
-        <b-button v-if="bookCount < 2" to="/bookB116/book" variant="primary" block>新建预约</b-button>
-        <b-button v-else variant="primary" block disabled>预约已达上限</b-button>
+        <b-button
+          v-if="bookCount < 2"
+          to="/bookB116/book"
+          variant="primary"
+          block
+        >
+          新建预约
+        </b-button>
+        <b-button v-else variant="primary" block disabled>
+          预约已达上限
+        </b-button>
       </b-col>
     </b-row>
-    <b-col v-for="bookRecord in bookRecords" :key="bookRecord.id" cols="12" class="py-2">
+    <b-col
+      v-for="bookRecord in bookRecords"
+      :key="bookRecord.id"
+      cols="12"
+      class="py-2"
+    >
       <BookRecord :record="bookRecord" @change="refresh" />
     </b-col>
   </b-container>
@@ -56,5 +70,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
