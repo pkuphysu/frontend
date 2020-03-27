@@ -47,7 +47,7 @@ export default {
         })
         return false
       } else {
-        return this.form
+        return this.form.values
       }
     }
   }
