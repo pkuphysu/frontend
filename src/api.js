@@ -78,7 +78,9 @@ export default {
   bookingAll: async () => await requestApi('get', '/api/booking/all', true),
   book: async data => {
     let rawId = store.state.user.rawId
-    return await requestApi('post', '/api/booking/book?rawId=' + rawId, true, data)
+    return (
+      await requestApi('post', '/api/booking/book?rawId=' + rawId, true, data)
+    )
   },
   cancel: async (book_id, vercode) =>
     await requestApi('post', '/api/booking/cancel', true, { book_id, vercode }),

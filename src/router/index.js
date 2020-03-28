@@ -4,14 +4,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: Home,
-  //   meta: {
-  //     title: 'Home'
-  //   }
-  // },
   {
     path: '/login',
     name: 'login',
@@ -42,7 +34,7 @@ const routes = [
   {
     path: '*',
     name: 'error',
-    component: () => import(/* webpackChunkName: "error" */'@/views/Error')
+    component: () => import(/* webpackChunkName: "error" */ '@/views/Error')
   }
 ]
 

@@ -1,22 +1,26 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>-->
     <div>
       <b-navbar toggleable="lg" type="dark" variant="primary" right>
-        <b-navbar-brand href="#">PKU Physics</b-navbar-brand>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-brand href="#">
+          PKU Physics
+        </b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse" />
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item to="/bookB116">主页</b-nav-item>
-            <b-nav-item @click="logout">注销</b-nav-item>
+            <b-nav-item to="/bookB116">
+              主页
+            </b-nav-item>
+            <b-nav-item @click="logout">
+              注销
+            </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
     </div>
-    <router-view />
+    <b-container>
+      <router-view />
+    </b-container>
     <div class="px-3 position-fixed fixed-bottom m-0">
       <DisAlert
         v-for="(message, i) in $store.state.alertMessages"
@@ -49,5 +53,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
