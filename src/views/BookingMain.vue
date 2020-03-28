@@ -153,7 +153,6 @@ export default {
         }
       } else {
         // Verify vercode and final submit
-        
         if (await this.requestBook()) this.$router.push('/bookB116')
       }
     },

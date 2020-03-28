@@ -1,9 +1,16 @@
+/**
+ * Prettier is evil and unreliable, at least for vue.
+ * Do not enable prettier plugin for eslint,
+ * there will be some annoying, ugly conflicts.
+ * Only use prettier in editor in selection
+ * and then eslint the error introduced
+ */
 module.exports = {
   root: true,
   env: {
     node: true
   },
-  extends: ['eslint:recommended', 'prettier/vue', 'plugin:vue/recommended'],
+  extends: ['eslint:recommended', 'plugin:vue/recommended'],
   rules: {
     'vue/max-attributes-per-line': [
       'warn',

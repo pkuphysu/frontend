@@ -1,9 +1,5 @@
 <template>
-  <FormulateForm
-    v-if="form"
-    ref="formulate"
-    v-model="form.values"
-  >
+  <FormulateForm v-if="form" ref="formulate" v-model="form.values">
     <FormulateInput
       v-for="field in form.fields"
       :key="field.name"

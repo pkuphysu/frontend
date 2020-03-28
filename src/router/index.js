@@ -34,7 +34,7 @@ const routes = [
   {
     path: '*',
     name: 'error',
-    component: () => import(/* webpackChunkName: "error" */'@/views/Error')
+    component: () => import(/* webpackChunkName: "error" */ '@/views/Error')
   }
 ]
 
