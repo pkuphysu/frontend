@@ -18,7 +18,7 @@
         </b-collapse>
       </b-navbar>
     </div>
-    <b-container>
+    <b-container style="min-height: 70vh">
       <router-view />
     </b-container>
     <div class="px-3 position-fixed fixed-bottom m-0">
@@ -28,10 +28,10 @@
         :message="message"
       />
     </div>
-    <div class="text-center">
+    <footer class="text-center py-3">
       &copy; 2019 北大物理. &nbsp;
       <a href="/html/feedback">问题反馈</a>
-    </div>
+    </footer>
   </div>
 </template>
 
