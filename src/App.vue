@@ -29,8 +29,10 @@
       />
     </div>
     <footer class="text-center py-3">
-      &copy; 2019 北大物理. &nbsp;
-      <a href="/html/feedback">问题反馈</a>
+      &copy; 2019 北大物理.  &nbsp;
+      <router-link to="/html/feedback">
+        问题反馈
+      </router-link>
     </footer>
   </div>
 </template>
