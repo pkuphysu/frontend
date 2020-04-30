@@ -23,7 +23,10 @@ export default {
   },
   async created() {
     let response = await fetch(`/${this.src}.md`)
-    this.content = await response.text()
+    let content = await response.text()
+    if (content.startsWith('<!DOCTYPE html>')) {
+      this.content = '## 这里没有文档'
+    } else this.content = content
   }
 }
 </script>
