@@ -57,8 +57,7 @@ export default {
     }
   },
   async created() {
-    this.$root.loginRequired()
-    this.refresh()
+    await this.refresh()
   },
   methods: {
     async refresh() {

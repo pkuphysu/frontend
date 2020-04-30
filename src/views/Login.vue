@@ -44,6 +44,13 @@ import api from '@/api'
 
 export default {
   name: 'Login',
+  props: {
+    from: {
+      type: String,
+      required: false,
+      default: '/bookB116'
+    }
+  },
   data() {
     return {
       stuId: '',
@@ -68,7 +75,7 @@ export default {
           user: resp.data.user,
           remember: this.remember
         })
-        this.$router.go(-1)
+        this.$router.push(this.from)
       }
     }
   }

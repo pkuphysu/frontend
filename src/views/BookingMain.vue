@@ -122,9 +122,6 @@ export default {
       ...CONSTS
     }
   },
-  created() {
-    this.$root.loginRequired()
-  },
   methods: {
     formatDateAhead(delta) {
       let d = new Date(today + delta * 86400000)
