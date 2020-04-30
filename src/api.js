@@ -30,8 +30,8 @@ const flashMsgs = resp => {
         msg in TRANSLATION
           ? TRANSLATION[msg]
           : code != 200
-          ? code + ' ' + msg
-          : msg,
+            ? code + ' ' + msg
+            : msg,
       variant: code == 200 ? 'info' : 'danger'
     })
   }
