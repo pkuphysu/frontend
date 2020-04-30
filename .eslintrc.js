@@ -19,6 +19,7 @@ module.exports = {
       }
     ],
     'vue/script-indent': 'warn',
+    'indent': ['warn', 2],
     'space-infix-ops': 'warn',
     'max-len': 'warn',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
