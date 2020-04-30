@@ -15,6 +15,10 @@ const routes = [
     meta: {
       title: '登录',
       loginRequired: false
+    },
+    beforeEnter: (to, from, next) => {
+      // visiting '/login' when logged in
+      if (store.state.user) next('/bookB116')
     }
   },
   {
