@@ -19,6 +19,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       // visiting '/login' when logged in
       if (store.state.user) next('/bookB116')
+      else next()
     }
   },
   {
