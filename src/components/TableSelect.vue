@@ -77,7 +77,9 @@ export default {
       for (let j = 0; j < hourCount; j++) bookingInfo[i][j] = []
     }
     for (const record of response) {
-      for (let i = record.start; i <= record.end; i++) { bookingInfo[record.day - this.BOOK_DAY_NEAREST][record.roomId].push(i) }
+      for (let i = record.start; i <= record.end; i++) {
+        bookingInfo[record.day - this.BOOK_DAY_NEAREST][record.roomId].push(i)
+      }
     }
     this.bookingInfo = bookingInfo
   },

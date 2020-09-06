@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from 'axios'
 import store from './store'
 import { TRANSLATION } from './consts'
@@ -14,7 +15,7 @@ const flashMsgs = resp => {
   let msgs = resp.data.message
   const code = resp.status
   if (!msgs) {
-    if (code != 200) {
+    if (code !== 200) {
       store.commit({
         type: 'alert',
         text: TRANSLATION['Fatal Error'],
@@ -30,10 +31,10 @@ const flashMsgs = resp => {
       text:
         msg in TRANSLATION
           ? TRANSLATION[msg]
-          : code != 200
+          : code !== 200
             ? code + ' ' + msg
             : msg,
-      variant: code == 200 ? 'info' : 'danger'
+      variant: code === 200 ? 'info' : 'danger'
     })
   }
 }

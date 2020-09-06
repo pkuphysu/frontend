@@ -14,7 +14,9 @@ export default new Vuex.Store({
     },
     login (state, payload) {
       state.user = payload.user
-      if (payload.remember) { localStorage.setItem('user', JSON.stringify(payload.user)) }
+      if (payload.remember) {
+        localStorage.setItem('user', JSON.stringify(payload.user))
+      }
     },
     logout (state) {
       state.user = null
