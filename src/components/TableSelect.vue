@@ -52,7 +52,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       bookingInfo: null,
       selecting: false,
@@ -63,34 +63,33 @@ export default {
     }
   },
   watch: {
-    selectedDayIndex() {
+    selectedDayIndex () {
       this.selectingRoom = this.selectStart = this.selectEnd = null
     }
   },
-  async created() {
-    let response = (await api.bookingAll()).data
+  async created () {
+    const response = (await api.bookingAll()).data
     const dayCount = this.BOOK_DAY_FARTHEST - this.BOOK_DAY_NEAREST + 1
     const hourCount = this.BOOK_HOUR_END - this.BOOK_HOUR_START + 1
-    let bookingInfo = new Array(dayCount)
+    const bookingInfo = new Array(dayCount)
     for (let i = 0; i < dayCount; i++) {
       bookingInfo[i] = new Array(hourCount)
       for (let j = 0; j < hourCount; j++) bookingInfo[i][j] = []
     }
-    for (let record of response) {
-      for (let i = record.start; i <= record.end; i++)
-        bookingInfo[record.day - this.BOOK_DAY_NEAREST][record.roomId].push(i)
+    for (const record of response) {
+      for (let i = record.start; i <= record.end; i++) { bookingInfo[record.day - this.BOOK_DAY_NEAREST][record.roomId].push(i) }
     }
     this.bookingInfo = bookingInfo
   },
   methods: {
-    targetTD(e) {
+    targetTD (e) {
       if (e.target.tagName === 'SPAN') return e.target.parentElement
       if (e.target.tagName === 'TD') return e.target
     },
-    pointerStart(e) {
+    pointerStart (e) {
       if (this.selecting) return
       this.selecting = true
-      let td = this.targetTD(e)
+      const td = this.targetTD(e)
       this.selectingRoom = td.cellIndex
       this.selectStart = this.selectEnd = td.parentElement.rowIndex
     },
@@ -101,10 +100,10 @@ export default {
      * @param {MouseEvent|TouchEvent} e - The event
      * @returns {}
      */
-    pointerMove(e) {
+    pointerMove (e) {
       if (!this.selecting) return
-      let point = e.touches ? e.touches[0] : e
-      let tds = document
+      const point = e.touches ? e.touches[0] : e
+      const tds = document
         .elementsFromPoint(point.clientX, point.clientY)
         .filter(ele => ele.tagName === 'TD')
       // Maybe out side the table
@@ -112,7 +111,7 @@ export default {
         this.selecting = false
         return
       }
-      let td = tds[0]
+      const td = tds[0]
       if (
         td.className.includes('td-booked') ||
         // Not seleting on the same day
@@ -125,10 +124,9 @@ export default {
       if (
         Math.abs(this.selectStart - this.selectEnd) <
         this.BOOK_MAX_SELECT - 1
-      )
-        this.selectEnd = td.parentElement.rowIndex
+      ) { this.selectEnd = td.parentElement.rowIndex }
     },
-    pointerEnd() {
+    pointerEnd () {
       if (this.selecting) {
         this.selecting = false
         this.$emit('selected', {

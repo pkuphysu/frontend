@@ -16,14 +16,14 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       content: null
     }
   },
-  async created() {
-    let response = await fetch(`/${this.src}.md`)
-    let content = await response.text()
+  async created () {
+    const response = await fetch(`/${this.src}.md`)
+    const content = await response.text()
     if (content.startsWith('<!DOCTYPE html>')) {
       this.content = '## 这里没有文档'
     } else this.content = content

@@ -8,14 +8,14 @@ module.exports = {
   //   })
   // },
   devServer: {
-    setup(app) {
+    setup (app) {
       app.get(/api\/.*/, (req, res, next) => {
         req.url = req.path + '.json'
         next()
       })
       app.use('/api', express.static('api'))
       app.post('/api/booking/book', (req, res) => {
-        let reqJ = JSON.parse(req.body)
+        const reqJ = JSON.parse(req.body)
         res.json({
           vercode: reqJ.vercode
         })

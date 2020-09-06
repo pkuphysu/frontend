@@ -111,7 +111,7 @@ export default {
     TableSelect,
     FormBuilder
   },
-  data() {
+  data () {
     return {
       selectedDayIndex: 0,
       selectedRoomTime: null,
@@ -123,14 +123,14 @@ export default {
     }
   },
   methods: {
-    formatDateAhead(delta) {
-      let d = new Date(today + delta * 86400000)
+    formatDateAhead (delta) {
+      const d = new Date(today + delta * 86400000)
       return `${d.getMonth() + 1}-${d.getDate()}`
     },
-    timeSelected(data) {
+    timeSelected (data) {
       this.selectedRoomTime = data
     },
-    daySelected(i) {
+    daySelected (i) {
       this.accordion[1] = true
       if (this.selectedDayIndex !== i) {
         this.selectedDayIndex = i
@@ -141,7 +141,7 @@ export default {
       // if I selected the same date
       this.$forceUpdate()
     },
-    async submit() {
+    async submit () {
       if (this.vercodeVisible === false) {
         // Varify form and request vercode
         if (await this.requestBook(true)) {
@@ -153,7 +153,7 @@ export default {
         if (await this.requestBook()) this.$router.push('/bookB116')
       }
     },
-    async sendVercode() {
+    async sendVercode () {
       this.countDown = 5
       await api.twiceVercode()
       while (--this.countDown) await sleep(1000)
@@ -164,9 +164,9 @@ export default {
      * @param {boolean} [test=false] - Testing request or real request
      * @returns {boolean} If server thinks the request is valid
      */
-    async requestBook(test) {
+    async requestBook (test) {
       // Client side varification
-      let formValues = await this.$refs.form.values()
+      const formValues = await this.$refs.form.values()
       if (!formValues) {
         return false
       }
@@ -194,7 +194,7 @@ export default {
       let [start, end] = this.selectedRoomTime.time
       start = new Date(+bookingDay).setHours(start, 0, 0, 0) / 1000
       end = new Date(+bookingDay).setHours(end, 50, 0, 0) / 1000
-      let data = {
+      const data = {
         room_id: this.selectedRoomTime.room,
         start,
         end,

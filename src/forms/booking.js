@@ -1,9 +1,9 @@
 import store from '@/store'
 
-export default function() {
+export default function () {
   // To enable multi people booking, remove pre-filled rawId,
   // and uncomment students field
-  let rawId = store.state.user.rawId
+  const rawId = store.state.user.rawId
   return {
     values: {
       sponsor: '',

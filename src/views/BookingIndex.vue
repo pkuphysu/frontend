@@ -45,23 +45,23 @@ export default {
   components: {
     BookRecord
   },
-  data() {
+  data () {
     return {
       bookCount: 0,
       bookRecords: []
     }
   },
   computed: {
-    user() {
+    user () {
       return this.$store.state.user
     }
   },
-  async created() {
+  async created () {
     await this.refresh()
   },
   methods: {
-    async refresh() {
-      let response = await api.bookingStatus()
+    async refresh () {
+      const response = await api.bookingStatus()
       this.bookCount = response.data.bookCount
       this.bookRecords = response.data.bookRecords
     }

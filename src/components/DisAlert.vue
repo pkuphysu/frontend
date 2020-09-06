@@ -19,13 +19,13 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       countDown: 10
     }
   },
   methods: {
-    countDownChanged(count) {
+    countDownChanged (count) {
       this.countDown = count
     }
   }

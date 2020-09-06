@@ -19,7 +19,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     let form = null
     try {
       form = forms[this.schema]()
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    async values() {
+    async values () {
       if (await this.$refs.formulate.hasValidationErrors()) {
         this.$store.commit({
           type: 'alert',

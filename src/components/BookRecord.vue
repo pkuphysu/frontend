@@ -108,7 +108,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       vercode: '',
       countDown: null,
@@ -116,22 +116,22 @@ export default {
     }
   },
   computed: {
-    userId() {
+    userId () {
       return this.$store.state.user.id
     },
-    sponsorId() {
+    sponsorId () {
       return this.record.confirmStatus[0].studentId
     },
-    dead() {
+    dead () {
       return this.record.startTime < cancelDDL
     },
-    badge() {
-      if (this.record.canceled)
+    badge () {
+      if (this.record.canceled) {
         return {
           variant: 'danger',
           text: '已取消'
         }
-      else if (this.record.confirmed) {
+      } else if (this.record.confirmed) {
         let text
         if (now > this.record.endTime) text = '已完成'
         else if (now < this.record.startTime) text = '成功预约'
@@ -140,47 +140,48 @@ export default {
           variant: 'success',
           text
         }
-      } else if (this.dead)
+      } else if (this.dead) {
         return {
           variant: 'danger',
           text: '预约失败'
         }
-      else
+      } else {
         return {
           variant: 'info',
           text: '等待确认'
         }
+      }
     }
   },
   watch: {
-    'record.canceled'() {
+    'record.canceled' () {
       this.countDown = null
     }
   },
   methods: {
-    async cancel() {
+    async cancel () {
       this.countDown = 3
       await api.twiceVercode()
       while (--this.countDown) await sleep(1000)
     },
-    async submit() {
-      let resp = await api.cancel(this.record.id, this.vercode)
+    async submit () {
+      const resp = await api.cancel(this.record.id, this.vercode)
       this.vercode = ''
       if (resp) this.$emit('change')
     },
-    async confirm() {
+    async confirm () {
       if (await api.confirm(this.record.id)) this.$emit('change')
     },
-    formatTime(time) {
-      let t = new Date(time)
+    formatTime (time) {
+      const t = new Date(time)
       return (
         `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ` +
         `${t.getHours()}:${t.getMinutes()}`
       )
     },
-    formatTimeRange(startTime, endTime) {
-      let s = this.formatTime(startTime)
-      let e = new Date(endTime)
+    formatTimeRange (startTime, endTime) {
+      const s = this.formatTime(startTime)
+      const e = new Date(endTime)
       return `${s} 至 ${e.getHours()}:${e.getMinutes()}`
     }
   }

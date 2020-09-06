@@ -10,7 +10,7 @@
 <script>
 export default {
   name: 'Error',
-  data() {
+  data () {
     return {
       code: '404'
     }

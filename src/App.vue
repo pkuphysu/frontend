@@ -47,7 +47,7 @@ export default {
     DisAlert
   },
   methods: {
-    logout() {
+    logout () {
       this.$store.commit('logout')
       this.$router.push('/login')
     }

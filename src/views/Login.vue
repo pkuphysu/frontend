@@ -51,7 +51,7 @@ export default {
       default: '/bookB116'
     }
   },
-  data() {
+  data () {
     return {
       stuId: '',
       countDown: null,
@@ -60,15 +60,15 @@ export default {
     }
   },
   methods: {
-    async getCode() {
+    async getCode () {
       // Cool down even if fail
       // disable it first, or ueser will click twice
       this.countDown = 5
       await api.loginVercode(this.stuId)
       while (--this.countDown) await sleep(1000)
     },
-    async login() {
-      let resp = await api.login(this.vercode)
+    async login () {
+      const resp = await api.login(this.vercode)
       if (resp) {
         this.$store.commit({
           type: 'login',

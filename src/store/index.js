@@ -9,15 +9,14 @@ export default new Vuex.Store({
     user: JSON.parse(localStorage.getItem('user'))
   },
   mutations: {
-    alert(state, msg) {
+    alert (state, msg) {
       state.alertMessages.push(msg)
     },
-    login(state, payload) {
+    login (state, payload) {
       state.user = payload.user
-      if (payload.remember)
-        localStorage.setItem('user', JSON.stringify(payload.user))
+      if (payload.remember) { localStorage.setItem('user', JSON.stringify(payload.user)) }
     },
-    logout(state) {
+    logout (state) {
       state.user = null
       localStorage.removeItem('user')
     }

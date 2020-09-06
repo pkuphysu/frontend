@@ -1,5 +1,5 @@
 module.exports = {
-  sleep(ms) {
+  sleep (ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
   }
 }
