@@ -1,4 +1,24 @@
 const express = require('express')
+const VueAutomaticImportPlugin = require(
+  'vue-automatic-import-loader/lib/plugin'
+)
+
+const plugins = []
+
+plugins.push(new VueAutomaticImportPlugin({
+  match (originalTag, { kebabTag, camelTag }) {
+    if (kebabTag.startsWith('b-')) {
+      return [
+        camelTag,
+        `import {${camelTag}} from 'bootstrap-vue'`
+      ]
+    }
+  }
+}))
+if (process.env.WEBPACK_STATS) {
+  const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+  plugins.push(new BundleAnalyzerPlugin())
+}
 
 module.exports = {
   // chainWebpack: config => {
@@ -7,6 +27,7 @@ module.exports = {
   //     return [options]
   //   })
   // },
+  configureWebpack: { plugins },
   devServer: {
     setup (app) {
       app.get(/api\/.*/, (req, res, next) => {

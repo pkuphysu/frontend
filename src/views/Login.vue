@@ -28,9 +28,9 @@
         placeholder="验证码"
         required
       />
-      <b-checkbox id="checkbox" v-model="remember" name="remember">
+      <b-form-checkbox id="checkbox" v-model="remember" name="remember">
         记住账号
-      </b-checkbox>
+      </b-form-checkbox>
       <b-button lg block variant="primary" type="submit">
         登录
       </b-button>
