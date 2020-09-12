@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { format } from 'light-date'
 import { BOOK_DAY_NEAREST, B116ROOMS } from '@/consts'
 import { sleep } from '@/utils'
 import api from '@/api'
@@ -173,16 +174,13 @@ export default {
       if (await api.confirm(this.record.id)) this.$emit('change')
     },
     formatTime (time) {
-      const t = new Date(time)
-      return (
-        `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ` +
-        `${t.getHours()}:${t.getMinutes()}`
-      )
+      return format(new Date(time), '{yyyy}-{MM}-{dd} {HH}:{mm}')
     },
     formatTimeRange (startTime, endTime) {
-      const s = this.formatTime(startTime)
-      const e = new Date(endTime)
-      return `${s} 至 ${e.getHours()}:${e.getMinutes()}`
+      return format(
+        new Date(endTime),
+        `${this.formatTime(startTime)} 至 {HH}:{mm}`
+      )
     }
   }
 }
