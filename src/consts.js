@@ -9,6 +9,7 @@ module.exports = {
   TRANSLATION: {
     'Network Error': '网络可能开了小差。。',
     'Fatal Error': '服务器不听话了，可通过问题反馈渠道告诉管理员',
+    Unauthorized: '登录信息无效或过期',
     'Vercode Sent': '验证码发送成功！',
     'Invalid Student ID': '学号打错了？',
     'Please log in to access this page.': '请先登录',
