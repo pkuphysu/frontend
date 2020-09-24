@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import axios from 'axios'
 import store from './store'
+import router from './router'
 import { TRANSLATION } from './consts'
 
 const flashMsgs = resp => {
@@ -14,6 +15,10 @@ const flashMsgs = resp => {
   }
   let msgs = resp.data.message
   const code = resp.status
+  if (code === 403) {
+    store.commit('logout')
+    router.push('/login')
+  }
   if (!msgs) {
     if (code !== 200) {
       store.commit({
