@@ -50,7 +50,7 @@ const requestApi = async (method, url, login, data) => {
   if (login === true) {
     if (url.includes('?')) url += '&'
     else url += '?'
-    url += `id=${escape(u.id)}&timestamp=${u.timestamp}&token=${u.token}`
+    url += `id=${escape(u.id)}&timestamp=${u.timestamp}`
   }
   let resp
   try {
@@ -72,6 +72,7 @@ export default {
   },
   login: async vercode =>
     await requestApi('post', '/api/login', false, { vercode }),
+  fullLogout: async => requestApi('get', '/api/logout', true),
   bookingStatus: async () => {
     const resp = await requestApi('get', '/api/booking/my', true)
     if (!resp) return false
