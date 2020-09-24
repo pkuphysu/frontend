@@ -27,6 +27,7 @@ module.exports = {
   //     return [options]
   //   })
   // },
+  publicPath: '/',
   configureWebpack: { plugins },
   devServer: {
     setup (app) {

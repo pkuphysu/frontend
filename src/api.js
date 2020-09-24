@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import axios from 'axios'
 import store from './store'
+import router from './router'
 import { TRANSLATION } from './consts'
 
 const flashMsgs = resp => {
@@ -14,6 +15,10 @@ const flashMsgs = resp => {
   }
   let msgs = resp.data.message
   const code = resp.status
+  if (code === 403) {
+    store.commit('logout')
+    router.push('/login')
+  }
   if (!msgs) {
     if (code !== 200) {
       store.commit({
@@ -45,7 +50,7 @@ const requestApi = async (method, url, login, data) => {
   if (login === true) {
     if (url.includes('?')) url += '&'
     else url += '?'
-    url += `id=${escape(u.id)}&timestamp=${u.timestamp}&token=${u.token}`
+    url += `id=${escape(u.id)}&timestamp=${u.timestamp}`
   }
   let resp
   try {
@@ -67,6 +72,7 @@ export default {
   },
   login: async vercode =>
     await requestApi('post', '/api/login', false, { vercode }),
+  fullLogout: async => requestApi('get', '/api/logout', true),
   bookingStatus: async () => {
     const resp = await requestApi('get', '/api/booking/my', true)
     if (!resp) return false

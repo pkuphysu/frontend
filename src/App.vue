@@ -11,9 +11,14 @@
             <b-nav-item to="/bookB116">
               主页
             </b-nav-item>
-            <b-nav-item @click="logout">
-              注销
-            </b-nav-item>
+            <b-nav-item-dropdown text="注销">
+              <b-dropdown-item @click="logout">
+                本机注销
+              </b-dropdown-item>
+              <b-dropdown-item @click="fullLogout">
+                全部注销
+              </b-dropdown-item>
+            </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -40,6 +45,7 @@
 <script>
 // @ is an alias to /src
 import DisAlert from '@/components/DisAlert'
+import api from '@/api'
 
 export default {
   name: 'App',
@@ -50,6 +56,10 @@ export default {
     logout () {
       this.$store.commit('logout')
       this.$router.push('/login')
+    },
+    async fullLogout () {
+      await api.fullLogout()
+      this.logout()
     }
   }
 }
