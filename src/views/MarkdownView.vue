@@ -22,7 +22,7 @@ export default {
     }
   },
   async created () {
-    const response = await fetch(`/${this.src}.md`)
+    const response = await fetch(`${process.env.BASE_URL}${this.src}.md`)
     const content = await response.text()
     if (content.startsWith('<!DOCTYPE html>')) {
       this.content = '## 这里没有文档'
