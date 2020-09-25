@@ -21,13 +21,7 @@ if (process.env.WEBPACK_STATS) {
 }
 
 module.exports = {
-  // chainWebpack: config => {
-  //   config.plugin('copy').tap(([options]) => {
-  //     options[0].ignore.push('api/**/*')
-  //     return [options]
-  //   })
-  // },
-  publicPath: '/',
+  publicPath: process.env.PUB_PATH || '/',
   configureWebpack: { plugins },
   devServer: {
     setup (app) {
