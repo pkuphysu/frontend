@@ -1,15 +1,8 @@
-<template>
-  <vue-markdown v-if="content" :source="content" class="m-2" />
-</template>
-
-<script>
-import VueMarkdown from 'vue-markdown'
+import marked from 'marked'
+import DOMPurify from 'dompurify'
 
 export default {
   name: 'MarkdownView',
-  components: {
-    VueMarkdown
-  },
   props: {
     src: {
       type: String,
@@ -27,8 +20,16 @@ export default {
     if (content.startsWith('<!DOCTYPE html>')) {
       this.content = '## 这里没有文档'
     } else this.content = content
+  },
+  render (createElement) {
+    return createElement(
+      'div', {
+        domProps: {
+          innerHTML: this.content
+            ? DOMPurify.sanitize(marked(this.content))
+            : ''
+        }
+      }
+    )
   }
 }
-</script>
-
-<style></style>
