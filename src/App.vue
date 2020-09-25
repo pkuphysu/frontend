@@ -1,29 +1,27 @@
 <template>
   <div id="app">
-    <div>
-      <b-navbar toggleable="lg" type="dark" variant="primary" right>
-        <b-navbar-brand href="#">
-          PKU Physics
-        </b-navbar-brand>
-        <b-navbar-toggle target="nav-collapse" />
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
-            <b-nav-item to="/bookB116">
-              主页
-            </b-nav-item>
-            <b-nav-item-dropdown text="注销">
-              <b-dropdown-item @click="logout">
-                本机注销
-              </b-dropdown-item>
-              <b-dropdown-item @click="fullLogout">
-                全部注销
-              </b-dropdown-item>
-            </b-nav-item-dropdown>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-    </div>
-    <b-container style="min-height: 70vh">
+    <b-navbar toggleable="lg" type="dark" variant="primary" right>
+      <b-navbar-brand href="#">
+        PKU Physics
+      </b-navbar-brand>
+      <b-navbar-toggle target="nav-collapse" />
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item to="/bookB116">
+            主页
+          </b-nav-item>
+          <b-nav-item-dropdown text="注销">
+            <b-dropdown-item @click="logout">
+              本机注销
+            </b-dropdown-item>
+            <b-dropdown-item @click="fullLogout">
+              全部注销
+            </b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+    <b-container class="mt-4" style="min-height: 70vh">
       <router-view />
     </b-container>
     <div class="px-3 position-fixed fixed-bottom m-0">
