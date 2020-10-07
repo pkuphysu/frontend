@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import { VBToggle } from 'bootstrap-vue'
 import CONSTS from '@/consts'
 import { sleep } from '@/utils'
 import TableSelect from '@/components/TableSelect'
@@ -110,6 +111,9 @@ export default {
   components: {
     TableSelect,
     FormBuilder
+  },
+  directives: {
+    'b-toggle': VBToggle
   },
   data () {
     return {
