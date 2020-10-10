@@ -4,6 +4,12 @@
       <img v-if="c == 0" :src="`${baseUrl}img/FermionLarge.svg`" width="150px">
       <span v-else>{{ c }}</span>
     </span>
+    <div>
+      你发现了什么大不了的事情~
+    </div>
+    <div>
+      Hint: 点击上方“预约主页”进入预约系统
+    </div>
   </div>
 </template>
 
