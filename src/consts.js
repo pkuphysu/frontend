@@ -12,6 +12,7 @@ module.exports = {
     Unauthorized: '登录信息无效或过期',
     'Logged In': '成功登录',
     'Vercode Sent': '验证码发送成功！',
+    'Get Code First': '请先获取验证码',
     'Invalid Student ID': '学号打错了？',
     'Please log in to access this page.': '请先登录',
     'User Not Found': '学号输入错误，请重新输入',
