@@ -22,7 +22,7 @@ if (process.env.WEBPACK_STATS) {
 
 module.exports = {
   publicPath: process.env.PUB_PATH || '/',
-  configureWebpack: { plugins },
+  configureWebpack: { plugins, devtool: 'source-map' },
   devServer: {
     setup (app) {
       app.get(/api\/.*/, (req, res, next) => {
