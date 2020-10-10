@@ -15,7 +15,7 @@ const flashMsgs = resp => {
   }
   let msgs = resp.data.message
   const code = resp.status
-  if (code === 403) {
+  if (code === 403 && msgs === 'Unauthorized') {
     store.commit('logout')
     router.push('/login')
   }
