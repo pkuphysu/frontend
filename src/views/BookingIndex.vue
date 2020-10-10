@@ -66,6 +66,7 @@ export default {
   methods: {
     async refresh () {
       const response = await api.bookingStatus()
+      if (!response) return
       this.bookCount = response.data.bookCount
       this.bookRecords = response.data.bookRecords
     }
