@@ -5,8 +5,9 @@
         <p>预约须知：</p>
         <ol>
           <li>
-            使用教室须提前3-7天预约，预约时须再邀请2名同学并通知他们确认，才能预约成功。
-            未能提前3-7天完成确认的，视为放弃预约。
+            使用教室须提前{{ BOOK_DAY_NEAREST }}-{{ BOOK_DAY_FARTHEST }}天预约，
+            <!-- 预约时须再邀请2名同学并通知他们确认，才能预约成功。 -->
+            未能提前{{ BOOK_DAY_NEAREST }}-{{ BOOK_DAY_FARTHEST }}天完成确认的，视为放弃预约。
           </li>
           <li>如要取消预约或修改预约，请提前3天以上取消原有预约。</li>
         </ol>
@@ -39,6 +40,7 @@
 <script>
 import BookRecord from '@/components/BookRecord'
 import api from '@/api'
+import { BOOK_DAY_NEAREST, BOOK_DAY_FARTHEST } from '@/consts'
 
 export default {
   name: 'BookingIndex',
@@ -47,6 +49,8 @@ export default {
   },
   data () {
     return {
+      BOOK_DAY_NEAREST,
+      BOOK_DAY_FARTHEST,
       bookCount: 0,
       bookRecords: []
     }
