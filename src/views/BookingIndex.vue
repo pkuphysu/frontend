@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col cols="12">
+      <b-col cols="12" class="mb-4">
         <p>预约须知：</p>
         <ol>
           <li>
@@ -12,6 +12,11 @@
           </li>
           <li>如要取消预约或修改预约，请提前 {{ BOOK_DAY_NEAREST }} 天以上取消原有预约。</li>
         </ol>
+        <div class="text-right">
+          <router-link to="/html/howto">
+            Read More...
+          </router-link>
+        </div>
       </b-col>
       <b-col cols="12">
         <b-button
