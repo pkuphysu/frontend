@@ -1,3 +1,4 @@
+<script>
 import marked from 'marked'
 import DOMPurify from 'dompurify'
 
@@ -24,6 +25,7 @@ export default {
   render (createElement) {
     return createElement(
       'div', {
+        class: ['markdown-view', 'mx-3'],
         domProps: {
           innerHTML: this.content
             ? DOMPurify.sanitize(marked(this.content))
@@ -33,3 +35,10 @@ export default {
     )
   }
 }
+</script>
+
+<style>
+.markdown-view img{
+  max-width: 100%;
+}
+</style>
