@@ -28,14 +28,15 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm i
       - name: Set env
-        run: echo "FILENAME=frontend-${GITHUB_REF#refs/*/}.zip" >> $GITHUB_ENV
+        id: file
+        run: echo ::set-output name=frontend-${GITHUB_REF#refs/*/}.zip
       - name: Build project
         run: |
           npm run build
-          zip -r $FILENAME dist/
+          zip -r ${{ steps.file.outputs.name }} dist/
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: ${{ contains(github.ref, '-') }}
           files: |
-            frontend-${{ env.FILENAME }}.zip
+            frontend-${{ steps.file.outputs.name }}.zip
