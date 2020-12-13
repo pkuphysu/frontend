@@ -27,15 +27,15 @@ jobs:
       - name: Install package
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm i
+      - name: Set env
+        run: echo "FILENAME=frontend-${GITHUB_REF#refs/*/}.zip" >> $GITHUB_ENV
       - name: Build project
         run: |
           npm run build
           zip -r $FILENAME dist/
-        env:
-          FILENAME: frontend-${{ github.ref }}.zip
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: ${{ contains(github.ref, '-') }}
           files: |
-            frontend-${{ github.ref }}.zip
+            frontend-${{ env.FILENAME }}.zip
