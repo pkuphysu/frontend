@@ -56,6 +56,9 @@
           :selected-day-index="selectedDayIndex"
           @selected="timeSelected"
         />
+        <div class="text-center">
+          <p>Hint: 可拖动选中以一次性预约多个连续时间段</p>
+        </div>
       </b-collapse>
     </b-card>
 
