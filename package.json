@@ -16,7 +16,7 @@
     "core-js": "^3.8.1",
     "dompurify": "^2.2.3",
     "light-date": "^1.2.0",
-    "marked": "^1.2.6",
+    "marked": "^2.0.0",
     "vue": "^2.6.10",
     "vue-router": "^3.4.9",
     "vuex": "^3.6.0"
