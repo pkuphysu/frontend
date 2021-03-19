@@ -21,7 +21,7 @@
       <b-col cols="12">
         <b-button
           v-if="bookCount < 2"
-          to="/bookB116/book"
+          to="/book"
           variant="primary"
           block
         >

@@ -157,7 +157,7 @@ export default {
         }
       } else {
         // Verify vercode and final submit
-        if (await this.requestBook()) this.$router.push('/bookB116')
+        if (await this.requestBook()) this.$router.push('/')
       }
     },
     async sendVercode () {

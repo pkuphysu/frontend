@@ -48,7 +48,7 @@ export default {
     from: {
       type: String,
       required: false,
-      default: '/bookB116'
+      default: '/'
     }
   },
   data () {

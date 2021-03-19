@@ -9,7 +9,7 @@
 
 ## 预约方式
 
-首先登录[北京大学物理学院主动学习实验室预约系统网站](https://www.pkuphy.cn/physu/bookB116)，在登录页面中输入自己的学号，并点击获取验证码，验证码将会发送至你的 PKU 邮箱。输入验证码，即可登录预约系统。
+首先登录[北京大学物理学院主动学习实验室预约系统网站](https://bookb116.phy.pku.edu.cn)，在登录页面中输入自己的学号，并点击获取验证码，验证码将会发送至你的 PKU 邮箱。输入验证码，即可登录预约系统。
 
 <p align="center">
 <img src="https://www.pkuphy.cn/physu/play/img/howto/login.jpg">

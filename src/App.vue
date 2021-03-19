@@ -8,7 +8,7 @@
         <b-navbar-toggle target="nav-collapse" />
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item to="/bookB116">
+            <b-nav-item to="/">
               预约主页
             </b-nav-item>
             <b-nav-item-dropdown text="注销">

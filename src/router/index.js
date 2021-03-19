@@ -18,12 +18,12 @@ const routes = [
     },
     beforeEnter: (to, from, next) => {
       // visiting '/login' when logged in
-      if (store.state.user) next('/bookB116')
+      if (store.state.user) next('/')
       else next()
     }
   },
   {
-    path: '/bookB116',
+    path: '/',
     name: 'bookingIndex',
     component: () =>
       import(/* webpackChunkName: "bookingIndex" */ '@/views/BookingIndex'),
@@ -33,7 +33,7 @@ const routes = [
     }
   },
   {
-    path: '/bookB116/book',
+    path: '/book',
     name: 'bookingMain',
     component: () =>
       import(/* webpackChunkName: "bookingMain" */ '@/views/BookingMain'),
