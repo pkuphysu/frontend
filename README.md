@@ -1,18 +1,26 @@
-# pkuphy-frontend
+# bookB116-frontend
+
+- [NPM Scripts](#npm-scripts)
+- [开发注意](#开发注意)
+  - [设置连接的后端](#设置连接的后端)
+  - [Auto Import](#auto-import)
+- [注意事项](#注意事项)
+  - [以 ESLint 为准！](#以-eslint-为准)
+  - [一些 Warning](#一些-warning)
+  - [为什么在 client 端 render Markdown？](#为什么在-client-端-render-markdown)
+- [部署](#部署)
+
+## NPM Scripts
 
 ```bash
 # Project setup
 npm install
-
 # Compiles and hot-reloads for development
 npm run serve
-
 # Compiles and minifies for production
 npm run build
-
 # Lints and fixes files
 npm run lint
-
 # Release new version
 npm version v1.0.0
 ```
@@ -40,3 +48,15 @@ npm version v1.0.0
 是无法避免的\~
 
 比如说缺少`jQuery`，是因为这里只使用了`Bootstrap`的 CSS
+
+### 为什么在 client 端 render Markdown？
+
+懒得搞 SSR / SSG
+
+## 部署
+
+```sh
+npm ci
+# 如果在 subpath，则需 PUB_PATH=/physu/
+npm run build
+```
